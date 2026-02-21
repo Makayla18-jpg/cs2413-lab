@@ -1,4 +1,4 @@
-#include "Student.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 //You are given a large integer represented as an integer array digits, where:
@@ -26,8 +26,55 @@
 //Output parameter (returnSize): set *returnSize to the number of digits in the returned array.
 
 int* plusOne(int* digits, int digitsSize, int* returnSize) {
-    // TODO: implement
+    for (int i = digitsSize - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i] += 1;
+            *returnSize = digitsSize;
+            return digits;
+        }
+        digits[i] = 0;
+    }
+    int* output = (int*)malloc(sizeof(int) * (digitsSize + 1));
+    output[0] = 1;
+    for (int i = 1; i <= digitsSize; i++) {
+        output[i] = 0;
+    }
+    *returnSize = digitsSize + 1;
+    return output;
+}
+int main() {
+    int digits1[] = {4, 3, 2, 1};
+    int size1 = sizeof(digits1) / sizeof(digits1[0]);
+    int returnSize1 = 0;
+
+    int* output1 = plusOne(digits1, size1, &returnSize1);
+    printf("Example 1 output is: ");
+
+    for (int i = 0; i < returnSize1; i++) {
+        printf("%d ", output1[i]);
+    }
+    printf("\n");
 
     
+    
+    int digits[] = {9};
+    int returnSize = 0;
+
+    int* output = plusOne(digits, 1, &returnSize);
+
+    if (output == NULL) {
+        printf("Failed");
+        return 1;
+    }
+
+    for (int i = 0; i < returnSize; i++) {
+        printf("%d ", output[i]);
+    }
+    printf("\n");
+
+    if (output != digits) {
+        free(output);
+    }
+    return 0;
 }
 
