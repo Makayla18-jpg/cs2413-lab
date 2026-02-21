@@ -6,9 +6,8 @@ int two_sum(const int* nums, int n, int target, int* out_i, int* out_j) {
             if (nums[i] + nums[j] == target) {
                 *out_i = i;
                 *out_j = j;
-            
                 return 1;
-            } 
+            }
         }
     }
     return 0;
