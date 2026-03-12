@@ -16,7 +16,7 @@
  *   make run1
  */
 
-#include <stddef.h>  // NULL
+#include <stdio.h>
 
 struct TreeNode {
     int val;
@@ -25,9 +25,34 @@ struct TreeNode {
 };
 
 struct TreeNode* bstSearch(struct TreeNode* root, int target) {
-    // TODO: implement
-    // Hint: Use the BST property to decide whether to go left or right.
-    (void)root;
-    (void)target;
+    while (root != NULL) {
+        if (root->val == target) {
+            return root;
+        }
+        else if (target < root->val) {
+            root = root->left;
+        }
+        else {
+            root = root->right;
+        }
+    }
     return NULL;
+}
+int main() {
+    struct TreeNode n1 = {2, NULL, NULL};
+    struct TreeNode n2 = {6, NULL, NULL};
+    struct TreeNode n3 = {4, &n1, &n2};
+    struct TreeNode n4 = {10, NULL, NULL};
+    struct TreeNode root = {8, &n3, &n4};
+
+    int target = 2;
+    struct TreeNode* result = bstSearch(&root, target);
+
+    if (result != NULL) {
+        printf("Node is: %d\n", result->val);
+    } else {
+        printf("ERROR\n");
+    }
+
+    return 0;
 }
